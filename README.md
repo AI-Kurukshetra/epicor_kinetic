@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextGen Manufacturing ERP
 
-## Getting Started
+Modern cloud-native manufacturing ERP MVP built with Next.js App Router, TypeScript, Tailwind CSS, shadcn-style UI primitives, Supabase auth/database, React Server Components, and Server Actions.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router
+- TypeScript
+- Tailwind CSS v4
+- Supabase Auth + Postgres
+- shadcn-style component primitives
+- Recharts
+
+## Features
+
+- Supabase login, signup, logout, and protected routes
+- Role-aware SaaS shell with sidebar navigation and dark mode
+- Dashboard KPIs, operations chart, recent activity, and alerts
+- Inventory management with detail and creation flows
+- Multi-level bill of materials rollups
+- Work orders and production scheduling
+- Purchase and sales order management
+- Quality inspections
+- Reporting dashboard
+- REST API routes for auth, inventory, BOM, work orders, purchases, sales, and reports
+- Seeded demo fallback when Supabase env vars are not configured
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy `.env.example` to `.env.local` and set:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+3. Apply the schema in `supabase/schema.sql`.
+
+4. Seed the database:
+
+```bash
+npm run seed
+```
+
+5. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `app/` routes, layouts, server actions, and API handlers
+- `components/` layout, shared, and UI primitives
+- `lib/` Supabase helpers, auth helpers, utilities, and validation
+- `services/` ERP data layer and mock seed data
+- `types/` shared TypeScript models
+- `scripts/seed.ts` Supabase seed script
+- `supabase/schema.sql` database schema and RLS policies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy directly to Vercel after adding the same environment variables. The app is already structured for App Router hosting with server actions and server components.

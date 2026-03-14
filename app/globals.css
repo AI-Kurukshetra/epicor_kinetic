@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --background: #f6f8fc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #335cff;
+  --primary-foreground: #eff4ff;
+  --secondary: #e7eefc;
+  --secondary-foreground: #1d4ed8;
+  --muted: #eef2f8;
+  --muted-foreground: #5f6b84;
+  --accent: #e9efff;
+  --accent-foreground: #1d4ed8;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff1f2;
+  --success: #16a34a;
+  --warning: #d97706;
+  --border: rgba(15, 23, 42, 0.08);
+  --input: rgba(15, 23, 42, 0.12);
+  --ring: rgba(51, 92, 255, 0.4);
+  --chart-1: #335cff;
+  --chart-2: #0ea5e9;
+  --chart-3: #16a34a;
+  --chart-4: #f59e0b;
+  --chart-5: #8b5cf6;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #081120;
+  --foreground: #edf2ff;
+  --card: rgba(13, 22, 40, 0.9);
+  --card-foreground: #edf2ff;
+  --popover: #081120;
+  --popover-foreground: #edf2ff;
+  --primary: #81a3ff;
+  --primary-foreground: #081120;
+  --secondary: rgba(129, 163, 255, 0.18);
+  --secondary-foreground: #c9d7ff;
+  --muted: rgba(148, 163, 184, 0.12);
+  --muted-foreground: #94a3b8;
+  --accent: rgba(129, 163, 255, 0.18);
+  --accent-foreground: #dbe7ff;
+  --destructive: #f87171;
+  --destructive-foreground: #fee2e2;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --border: rgba(148, 163, 184, 0.15);
+  --input: rgba(148, 163, 184, 0.22);
+  --ring: rgba(129, 163, 255, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(51, 92, 255, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 248, 252, 1));
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top left, rgba(51, 92, 255, 0.2), transparent 26%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 20%),
+    linear-gradient(180deg, rgba(8, 17, 32, 1), rgba(5, 10, 22, 1));
+}
+
+::selection {
+  background: rgba(51, 92, 255, 0.18);
+}
+
+@utility surface {
+  @apply rounded-3xl border bg-card/90 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_60px_rgba(2,8,23,0.35)];
+}
+
+@utility subtle-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-enter-up {
+  animation: enter-up 0.4s ease-out both;
 }
