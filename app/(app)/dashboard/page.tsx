@@ -31,13 +31,13 @@ export default async function DashboardPage() {
       getWorkOrders(),
     ]);
 
-  const hasError = Boolean(
-    productsError ||
-      inventoryError ||
-      suppliersError ||
-      customersError ||
-      workOrdersError,
-  );
+  const hasError =
+  (productsError && products.length === 0) ||
+  (inventoryError && inventory.length === 0) ||
+  (suppliersError && suppliers.length === 0) ||
+  (customersError && customers.length === 0) ||
+  (workOrdersError && workOrders.length === 0);
+  
   const activeWorkOrders = workOrders.filter(
     (order) => order.status === "In Production",
   ).length;
